@@ -44,9 +44,9 @@
     },
     {
       "id": 7,
-      "title": "Clean Code: Writing Code for Humans",
+      "title": "Clean Code: Writing Code for Humans - 2",
       "slug": "writing-clean-code-humans",
-      "authorId": 1,
+      "authorId": 2,
       "category": "Software Practices"
     },
     {
@@ -69,22 +69,6 @@
       "slug": "web-components-shadow-dom",
       "authorId": 1,
       "category": "HTML5"
-    },
-    {
-      "id": 11,
-      "slug": "curso-do-valdeir",
-      "title": "curso do valdeir",
-      "authorId": 1,
-      "category": "Esse é um texto",
-      "createdAt": 1586230626211
-    },
-    {
-      "id": 12,
-      "slug": "livro",
-      "title": "Livro",
-      "authorId": 1,
-      "category": "category",
-      "createdAt": 1586231779438
     }
   ],
   "authors": [
