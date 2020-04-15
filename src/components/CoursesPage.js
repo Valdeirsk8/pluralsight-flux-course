@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { getCourses } from "../api/courseApi";
 import CourseList from "./CourseList";
+import courseStore from "../stores/courseStore";
+import { loadCourses, deleteCourse } from "../actions/courseActions";
 
 function CoursesPage() {
-  const [courses, setCourses] = useState([]);
+  const [courses, setCourses] = useState(courseStore.getCourses());
 
   useEffect(() => {
-    getCourses().then((_courses) => setCourses(_courses));
+    courseStore.addCangeListener(onChange);
+    if (courseStore.getCourses().length === 0) loadCourses();
+    return () => courseStore.removeChangeListener(onChange);
   }, []);
+
+  function onChange() {
+    setCourses(courseStore.getCourses());
+  }
 
   return (
     <>
@@ -17,20 +23,9 @@ function CoursesPage() {
       <Link to="course" className="btn btn-primary">
         Add Course
       </Link>
-      <CourseList courses={courses} />
+      <CourseList courses={courses} deleteCourse={deleteCourse} />
     </>
   );
 }
-
-CourseList.propType = {
-  courses: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      title: PropTypes.string.isRequired,
-      authorId: PropTypes.number.isRequired,
-      category: PropTypes.string.isRequired,
-    })
-  ),
-};
 
 export default CoursesPage;

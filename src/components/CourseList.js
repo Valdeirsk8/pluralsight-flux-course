@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 function CourseList(props) {
@@ -9,6 +10,7 @@ function CourseList(props) {
           <th>Title</th>
           <th>Author ID</th>
           <th>Category</th>
+          <th>{""}</th>
         </tr>
       </thead>
       <tbody>
@@ -20,6 +22,14 @@ function CourseList(props) {
               </td>
               <td>{course.authorId}</td>
               <td>{course.category}</td>
+              <td>
+                <button
+                  className="btn btn-outline-danger"
+                  onClick={() => props.deleteCourse(course.id)}
+                >
+                  Delete
+                </button>
+              </td>
             </tr>
           );
         })}
@@ -27,5 +37,17 @@ function CourseList(props) {
     </table>
   );
 }
+
+CourseList.propType = {
+  courses: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      title: PropTypes.string.isRequired,
+      authorId: PropTypes.number.isRequired,
+      category: PropTypes.string.isRequired,
+    })
+  ),
+  deleteCourse: PropTypes.func.isRequired,
+};
 
 export default CourseList;
